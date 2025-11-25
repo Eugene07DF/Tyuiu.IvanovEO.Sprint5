@@ -2,28 +2,44 @@
 using tyuiu.cources.programming.interfaces.Sprint5;
 namespace Tyuiu.IvanovEO.Sprint5.Task3.V22
 {
-    public class Class1 : ISprint5Task4V22
+    public class Class1 : ISprint5Task3V22
     {
-       
-            public double LoadFromDataFile(string path)
+        public string SaveToFileTextData(int x)
         {
+            // Вычисление значения функции
+            double numerator = Math.Pow(1 - x, 2);
+            double denominator = -3 * x;
+            double result = numerator / denominator;
+
+            // Округление до трёх знаков после запятой
+            double roundedResult = Math.Round(result, 3);
+
+            // Вывод на консоль
+            Console.WriteLine($"При x = {x}: y(x) = {roundedResult:F3}");
+
+            // Создание временного файла
+            string tempFileName = Path.GetTempFileName();
+
             try
             {
-                // Читаем все байты из файла
-                byte[] bytes = File.ReadAllBytes(path);
+                // Сохраняем double значение в бинарный файл
+                using (BinaryWriter writer = new BinaryWriter(File.Open(tempFileName, FileMode.Create)))
+                {
+                    writer.Write(roundedResult);
+                }
 
-                // Преобразуем байты обратно в double
-                double result = BitConverter.ToDouble(bytes, 0);
-
-                // Округляем до трёх знаков после запятой
-                return Math.Round(result, 3);
+                // Возвращаем путь к созданному файлу
+                return tempFileName;
             }
             catch (Exception ex)
             {
-                throw new Exception($"Ошибка при чтении файла: {ex.Message}");
+                if (File.Exists(tempFileName))
+                {
+                    File.Delete(tempFileName);
+                }
+                return $"Ошибка: {ex.Message}";
             }
         }
-    
     }
 
 
