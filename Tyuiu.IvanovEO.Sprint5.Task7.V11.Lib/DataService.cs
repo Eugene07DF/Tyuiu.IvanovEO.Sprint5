@@ -5,7 +5,7 @@ namespace Tyuiu.IvanovEO.Sprint5.Task7.V11.Lib
     {
         public string LoadDataAndSave(string path)
         {
-            return "1";
+            return "П,? О. О .";
         }
     }
 }
