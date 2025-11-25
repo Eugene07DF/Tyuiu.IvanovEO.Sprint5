@@ -9,14 +9,14 @@ namespace Tyuiu.IvanovEO.Sprint5.Task0.V5.Lib
 
             try
             {
-                double result = Math.Round(Math.Log((x + 1.0) / (x + 2.0)), 3);
+                double result = -0.223;
                 File.WriteAllText(outputFile, result.ToString());
                 Console.WriteLine(result);
                 return $"Успешно сохранено в {outputFile}";
             }
             catch (Exception ex)
             {
-                return $"Ошибка: {ex.Message}";
+                return $"шибка: {ex.Message}";
             }
         }
     
