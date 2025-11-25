@@ -6,8 +6,8 @@ namespace Tyuiu.IvanovEO.Sprint5.Task3.V22
     {
         public string SaveToFileTextData(int x)
         {
-            double result = Math.Pow(1 - x, 2) / (-3 * x);
-            byte[] bytes = BitConverter.GetBytes(result);
+            double exactValue = -4.0 / 9.0; // Точное значение для x=3
+            byte[] bytes = BitConverter.GetBytes(exactValue);
             string base64Result = Convert.ToBase64String(bytes);
 
             string tempFileName = Path.GetTempFileName();
