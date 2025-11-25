@@ -6,46 +6,19 @@ namespace Tyuiu.IvanovEO.Sprint5.Task3.V22
     {
         public string SaveToFileTextData(int x)
         {
-            // Вычисление значения функции
-            double numerator = Math.Pow(1 - x, 2);
-            double denominator = -3 * x;
-            double result = numerator / denominator;
-
-            // Округление до трёх знаков после запятой
-            double roundedResult = Math.Round(result, 3);
-
-            // Вывод на консоль
-            Console.WriteLine($"При x = {x}: y(x) = {roundedResult:F3}");
-
-            // Преобразуем double в byte[]
-            byte[] bytes = BitConverter.GetBytes(roundedResult);
-
-            // Конвертируем байты в base64 строку
+            double result = Math.Pow(1 - x, 2) / (-3 * x);
+            byte[] bytes = BitConverter.GetBytes(result);
             string base64Result = Convert.ToBase64String(bytes);
 
-            // Создание временного файла
             string tempFileName = Path.GetTempFileName();
+            File.WriteAllBytes(tempFileName, bytes);
 
-            try
-            {
-                // Сохраняем бинарные данные в файл
-                File.WriteAllBytes(tempFileName, bytes);
-
-                // Возвращаем base64 строку
-                return base64Result;
-            }
-            catch (Exception ex)
-            {
-                if (File.Exists(tempFileName))
-                {
-                    File.Delete(tempFileName);
-                }
-                return $"Ошибка: {ex.Message}";
-            }
+            return base64Result;
         }
-
-
     }
+
+
+    
 
 }
     
