@@ -16,40 +16,36 @@ namespace Tyuiu.IvanovEO.Sprint5.Task3.V22
             // Вывод на консоль
             Console.WriteLine($"При x = {x}: y(x) = {roundedResult:F3}");
 
+            // Получаем байты double числа
+            byte[] bytes = BitConverter.GetBytes(roundedResult);
+
+            // Кодируем в base64
+            string base64Result = Convert.ToBase64String(bytes);
+
             // Создание временного файла
             string tempFileName = Path.GetTempFileName();
 
             try
             {
-                // Сохранение в бинарный файл
-                using (BinaryWriter writer = new BinaryWriter(File.Open(tempFileName, FileMode.Create)))
-                {
-                    writer.Write(roundedResult);
-                }
+                // Сохраняем base64 строку в файл как текст
+                File.WriteAllText(tempFileName, base64Result);
 
-                // Переименование файла в нужное имя (опционально)
-                string finalFileName = "OutPutFileTask3.bin";
-                string finalPath = Path.Combine(Path.GetDirectoryName(tempFileName), finalFileName);
+                // ИЛИ если нужно сохранить именно бинарные данные:
+                // File.WriteAllBytes(tempFileName, bytes);
 
-                // Если файл с таким именем уже существует - удаляем его
-                if (File.Exists(finalPath))
-                {
-                    File.Delete(finalPath);
-                }
+                Console.WriteLine($"Base64: {base64Result}");
 
-                File.Move(tempFileName, finalPath);
-
-                return roundedResult.ToString();
+                return base64Result; // Возвращаем base64 строку
             }
             catch (Exception ex)
             {
-                // В случае ошибки удаляем временный файл
                 if (File.Exists(tempFileName))
                 {
                     File.Delete(tempFileName);
                 }
-                return roundedResult.ToString();
+                return $"Ошибка: {ex.Message}";
             }
         }
     }
+    
 }
