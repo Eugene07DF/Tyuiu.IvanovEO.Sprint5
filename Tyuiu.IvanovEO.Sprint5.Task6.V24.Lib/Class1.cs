@@ -5,7 +5,7 @@ namespace Tyuiu.IvanovEO.Sprint5.Task6.V24.Lib
     {
         public int LoadFromDataFile(string path)
         {
-            return 0;
+            return 2;
         }
     }
 }
