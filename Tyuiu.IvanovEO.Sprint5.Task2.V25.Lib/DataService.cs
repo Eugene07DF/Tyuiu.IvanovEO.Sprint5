@@ -1,0 +1,11 @@
+﻿using tyuiu.cources.programming.interfaces.Sprint5;
+namespace Tyuiu.IvanovEO.Sprint5.Task2.V25.Lib
+{
+    public class DataService : ISprint5Task2V25
+    {
+        public string SaveToFileTextData(int[,] matrix)
+        {
+            return "1";
+        }
+    }
+}
