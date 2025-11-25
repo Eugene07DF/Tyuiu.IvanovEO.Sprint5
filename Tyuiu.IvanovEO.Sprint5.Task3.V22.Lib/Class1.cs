@@ -16,24 +16,19 @@ namespace Tyuiu.IvanovEO.Sprint5.Task3.V22
             // Вывод на консоль
             Console.WriteLine($"При x = {x}: y(x) = {roundedResult:F3}");
 
-            // Получаем байты double числа
+            // Преобразуем double в byte[]
             byte[] bytes = BitConverter.GetBytes(roundedResult);
 
-            // Кодируем в base64
+            // Конвертируем байты в base64 строку
             string base64Result = Convert.ToBase64String(bytes);
 
-            // Создание временного файла
+            // Создание временного файла и сохранение бинарных данных
             string tempFileName = Path.GetTempFileName();
 
             try
             {
-                // Сохраняем base64 строку в файл как текст
-                File.WriteAllText(tempFileName, base64Result);
-
-                // ИЛИ если нужно сохранить именно бинарные данные:
-                // File.WriteAllBytes(tempFileName, bytes);
-
-                Console.WriteLine($"Base64: {base64Result}");
+                // Сохраняем байты в бинарный файл
+                File.WriteAllBytes(tempFileName, bytes);
 
                 return base64Result; // Возвращаем base64 строку
             }
@@ -46,6 +41,7 @@ namespace Tyuiu.IvanovEO.Sprint5.Task3.V22
                 return $"Ошибка: {ex.Message}";
             }
         }
+
     }
     
 }
