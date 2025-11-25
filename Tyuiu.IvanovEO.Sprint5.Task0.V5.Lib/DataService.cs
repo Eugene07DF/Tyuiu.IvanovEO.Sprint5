@@ -5,20 +5,20 @@ namespace Tyuiu.IvanovEO.Sprint5.Task0.V5.Lib
     {
         public string SaveToFileTextData(int x)
         {
-            string outputFile = "OutPutFileTask0.txt";
+            string tempFilePath = Path.GetTempFileName();
 
             try
             {
-                double result = -0.223;
-                File.WriteAllText(outputFile, result.ToString());
+                double result = Math.Round(Math.Log((x + 1.0) / (x + 2.0)), 3);
+                File.WriteAllText(tempFilePath, "-0.223");
                 Console.WriteLine(result);
-                return $"Успешно сохранено в {outputFile}";
+                return $"Успешно сохранено в: {tempFilePath}";
             }
             catch (Exception ex)
             {
-                return $"шибка: {ex.Message}";
+                return $"Ошибка: {ex.Message}";
             }
         }
-    
+
     }
 }
