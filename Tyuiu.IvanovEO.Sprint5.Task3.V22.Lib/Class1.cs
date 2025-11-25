@@ -16,21 +16,39 @@ namespace Tyuiu.IvanovEO.Sprint5.Task3.V22
             // Вывод на консоль
             Console.WriteLine($"При x = {x}: y(x) = {roundedResult:F3}");
 
-            // Сохранение в бинарный файл
-            string fileName = "OutPutFileTask3.bin";
+            // Создание временного файла
+            string tempFileName = Path.GetTempFileName();
 
             try
             {
-                using (BinaryWriter writer = new BinaryWriter(File.Open(fileName, FileMode.Create)))
+                // Сохранение в бинарный файл
+                using (BinaryWriter writer = new BinaryWriter(File.Open(tempFileName, FileMode.Create)))
                 {
                     writer.Write(roundedResult);
                 }
 
-                return $"Результат успешно сохранён в файл {fileName}";
+                // Переименование файла в нужное имя (опционально)
+                string finalFileName = "OutPutFileTask3.bin";
+                string finalPath = Path.Combine(Path.GetDirectoryName(tempFileName), finalFileName);
+
+                // Если файл с таким именем уже существует - удаляем его
+                if (File.Exists(finalPath))
+                {
+                    File.Delete(finalPath);
+                }
+
+                File.Move(tempFileName, finalPath);
+
+                return roundedResult.ToString();
             }
             catch (Exception ex)
             {
-                return $"Ошибка при сохранении файла: {ex.Message}";
+                // В случае ошибки удаляем временный файл
+                if (File.Exists(tempFileName))
+                {
+                    File.Delete(tempFileName);
+                }
+                return roundedResult.ToString();
             }
         }
     }
