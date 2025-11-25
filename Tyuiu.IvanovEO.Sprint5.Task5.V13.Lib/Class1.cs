@@ -35,7 +35,7 @@ namespace Tyuiu.IvanovEO.Sprint5.Task5.V13.Lib
                 if (numbersInRange.Count == 0)
                 {
                     Console.WriteLine("В файле нет чисел в диапазоне от -1.5 до 1.5");
-                    return 0;
+                    return 1;
                 }
 
                 // Вычисляем среднее значение
@@ -55,7 +55,7 @@ namespace Tyuiu.IvanovEO.Sprint5.Task5.V13.Lib
             catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка: {ex.Message}");
-                return 0;
+                return 1;
             }
         }
     }
