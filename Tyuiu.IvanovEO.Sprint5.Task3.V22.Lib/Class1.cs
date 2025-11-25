@@ -4,22 +4,47 @@ namespace Tyuiu.IvanovEO.Sprint5.Task3.V22
 {
     public class Class1 : ISprint5Task3V22
     {
-      
-           public string SaveToFileTextData(int x)
+        public string SaveToFileTextData(int x)
         {
-            double result = Math.Pow(1 - x, 2) / (-3 * x);
+            // Вычисление значения функции
+            double numerator = Math.Pow(1 - x, 2);
+            double denominator = -3 * x;
+            double result = numerator / denominator;
+
+            // Округление до трёх знаков после запятой
             double roundedResult = Math.Round(result, 3);
 
+            // Вывод на консоль
             Console.WriteLine($"При x = {x}: y(x) = {roundedResult:F3}");
 
+            // Преобразуем double в byte[]
+            byte[] bytes = BitConverter.GetBytes(roundedResult);
+
+            // Конвертируем байты в base64 строку
+            string base64Result = Convert.ToBase64String(bytes);
+
+            // Создание временного файла
             string tempFileName = Path.GetTempFileName();
 
-            // Сохраняем в файл как текстовое представление
-            File.WriteAllText(tempFileName, roundedResult.ToString(CultureInfo.InvariantCulture));
+            try
+            {
+                // Сохраняем бинарные данные в файл
+                File.WriteAllBytes(tempFileName, bytes);
 
-            // Возвращаем строковое представление числа
-            return roundedResult.ToString(CultureInfo.InvariantCulture);
+                // Возвращаем base64 строку
+                return base64Result;
+            }
+            catch (Exception ex)
+            {
+                if (File.Exists(tempFileName))
+                {
+                    File.Delete(tempFileName);
+                }
+                return $"Ошибка: {ex.Message}";
+            }
         }
+
+
     }
 
 }
