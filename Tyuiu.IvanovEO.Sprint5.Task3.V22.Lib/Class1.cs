@@ -2,23 +2,32 @@
 using tyuiu.cources.programming.interfaces.Sprint5;
 namespace Tyuiu.IvanovEO.Sprint5.Task3.V22
 {
-    public class Class1 : ISprint5Task3V22
+    public class Class1 : ISprint5Task4V22
     {
-        public string SaveToFileTextData(int x)
+       
+            public double LoadFromDataFile(string path)
         {
-            double exactValue = -4.0 / 9.0; // Точное значение для x=3
-            byte[] bytes = BitConverter.GetBytes(exactValue);
-            string base64Result = Convert.ToBase64String(bytes);
+            try
+            {
+                // Читаем все байты из файла
+                byte[] bytes = File.ReadAllBytes(path);
 
-            string tempFileName = Path.GetTempFileName();
-            File.WriteAllBytes(tempFileName, bytes);
+                // Преобразуем байты обратно в double
+                double result = BitConverter.ToDouble(bytes, 0);
 
-            return base64Result;
+                // Округляем до трёх знаков после запятой
+                return Math.Round(result, 3);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ошибка при чтении файла: {ex.Message}");
+            }
         }
+    
     }
 
 
-    
+
 
 }
     
