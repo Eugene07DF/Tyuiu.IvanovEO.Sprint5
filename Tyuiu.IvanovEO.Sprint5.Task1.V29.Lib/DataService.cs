@@ -1,12 +1,13 @@
 ﻿using tyuiu.cources.programming.interfaces.Sprint1;
+using tyuiu.cources.programming.interfaces.Sprint5;
 
 namespace Tyuiu.IvanovEO.Sprint5.Task1.V29.Lib
 {
-    public class DataService : ISprint1Task1V29
+    public class DataService : ISprint5Task1V29
     {
-        public double Calculate(double a, double b, double c)
+        public string SaveToFileTextData(int startValue, int stopValue)
         {
-            return 1;
+            return "1";
         }
     }
 }
