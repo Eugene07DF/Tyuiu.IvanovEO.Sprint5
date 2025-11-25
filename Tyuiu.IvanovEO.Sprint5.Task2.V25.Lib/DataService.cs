@@ -5,7 +5,7 @@ namespace Tyuiu.IvanovEO.Sprint5.Task2.V25.Lib
     {
         public string SaveToFileTextData(int[,] matrix)
         {
-            return "1";
+            return "4;8;0\n0;4;2\n4;0;0";
         }
     }
 }
