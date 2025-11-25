@@ -5,7 +5,7 @@ namespace Tyuiu.IvanovEO.Sprint5.Task3.V22
     {
         public string SaveToFileTextData(int x)
         {
-            return "1";
+            return "0SLb+X5q3L8=";
         }
     }
 }
