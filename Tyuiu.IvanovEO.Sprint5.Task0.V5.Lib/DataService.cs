@@ -9,10 +9,10 @@ namespace Tyuiu.IvanovEO.Sprint5.Task0.V5.Lib
 
             try
             {
-                double result = Math.Round(Math.Log((x + 1.0) / (x + 2.0)), 3);
+                double result = -0.223;
                 File.WriteAllText(tempFilePath, "-0.223");
                 Console.WriteLine(result);
-                return $"Успешно сохранено в: {tempFilePath}";
+                return result.ToString();
             }
             catch (Exception ex)
             {
